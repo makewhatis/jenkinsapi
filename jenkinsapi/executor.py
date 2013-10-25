@@ -11,7 +11,8 @@ log = logging.getLogger(__name__)
 
 class Executor(JenkinsBase):
     """
-    Class to hold information on nodes that are attached as slaves to the master jenkins instance
+    Class to hold information on nodes that are attached as slaves to the
+    master jenkins instance
     """
 
     def __init__(self, baseurl, nodename, jenkins_obj, number):
@@ -41,7 +42,7 @@ class Executor(JenkinsBase):
 
     def get_number(self):
         """
-        Get Executor number. 
+        Get Executor number.
         """
         self.poll()
         return self._data['']
@@ -66,4 +67,3 @@ class Executor(JenkinsBase):
         """
         self.poll()
         return self._data['currentExecutable']
-

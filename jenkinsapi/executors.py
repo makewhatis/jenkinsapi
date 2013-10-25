@@ -1,6 +1,7 @@
 """
-This module implements the Executors class, which is intended to be a container-like
-interface for all of the executors defined on a single Jenkins node.
+This module implements the Executors class, which is intended to be a
+container-like interface for all of the executors defined on a single
+Jenkins node.
 """
 import logging
 from jenkinsapi.executor import Executor
@@ -13,7 +14,7 @@ log = logging.getLogger(__name__)
 class Executors(JenkinsBase):
     """
     This class provides a container-like API which gives
-    access to all executors on a Jenkins node. 
+    access to all executors on a Jenkins node.
 
     Returns a list of Executor Objects.
     """
@@ -33,9 +34,11 @@ class Executors(JenkinsBase):
         for index in range(self.count):
             executor_url = '%s/executors/%s' % (self.baseurl, index)
             try:
-                yield Executor(executor_url, self.nodename, self.jenkins, index)
+                yield Executor(
+                    executor_url,
+                    self.nodename,
+                    self.jenkins,
+                    index
+                )
             except JenkinsAPIException as e:
                 log.error("Error querying Executors: %s" % e)
-
-                
-

@@ -31,284 +31,227 @@ class TestExecutors(unittest.TestCase):
     }
 
     DATA0 = {
-          "actions" : [
-            
-          ],
-          "displayName" : "host0.host.com",
-          "executors" : [
-            {
-              
+        "actions": [
+        ],
+        "displayName": "host0.host.com",
+        "executors": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "icon": "computer.png",
+        "idle": False,
+        "jnlpAgent": True,
+        "launchSupported": False,
+        "loadStatistics": {
+
+        },
+        "manualLaunchAllowed": True,
+        "monitorData": {
+            "hudson.node_monitors.SwapSpaceMonitor": {
+                "availablePhysicalMemory": 8462417920,
+                "availableSwapSpace": 0,
+                "totalPhysicalMemory": 75858042880,
+                "totalSwapSpace": 0
             },
-            {
-              
+            "hudson.node_monitors.ArchitectureMonitor": "Linux (amd64)",
+            "hudson.node_monitors.ResponseTimeMonitor": {
+                "average": 2
             },
-            {
-              
+            "hudson.node_monitors.TemporarySpaceMonitor": {
+                "path": "/tmp",
+                "size": 430744551424
             },
-            {
-              
+            "hudson.node_monitors.DiskSpaceMonitor": {
+                "path": "/data/jenkins",
+                "size": 1214028627968
             },
-            {
-              
-            },
-            {
-              
-            },
-            {
-              
-            },
-            {
-              
+            "hudson.node_monitors.ClockMonitor": {
+                "diff": 1
             }
-          ],
-          "icon" : "computer.png",
-          "idle" : False,
-          "jnlpAgent" : True,
-          "launchSupported" : False,
-          "loadStatistics" : {
-            
-          },
-          "manualLaunchAllowed" : True,
-          "monitorData" : {
-            "hudson.node_monitors.SwapSpaceMonitor" : {
-              "availablePhysicalMemory" : 8462417920,
-              "availableSwapSpace" : 0,
-              "totalPhysicalMemory" : 75858042880,
-              "totalSwapSpace" : 0
-            },
-            "hudson.node_monitors.ArchitectureMonitor" : "Linux (amd64)",
-            "hudson.node_monitors.ResponseTimeMonitor" : {
-              "average" : 2
-            },
-            "hudson.node_monitors.TemporarySpaceMonitor" : {
-              "path" : "/tmp",
-              "size" : 430744551424
-            },
-            "hudson.node_monitors.DiskSpaceMonitor" : {
-              "path" : "/data/jenkins",
-              "size" : 1214028627968
-            },
-            "hudson.node_monitors.ClockMonitor" : {
-              "diff" : 1
-            }
-          },
-          "numExecutors" : 8,
-          "offline" : False,
-          "offlineCause" : None,
-          "offlineCauseReason" : "",
-          "oneOffExecutors" : [
-            {
-              
-            },
-            {
-              
-            }
-          ],
-          "temporarilyOffline" : False
-        }
+        },
+        "numExecutors": 8,
+        "offline": False,
+        "offlineCause": None,
+        "offlineCauseReason": "",
+        "oneOffExecutors": [
+            {},
+            {}
+        ],
+        "temporarilyOffline": False
+    }
 
     DATA1 = {
-          "actions" : [
-            
-          ],
-          "displayName" : "host1.host.com",
-          "executors" : [
-            {
-              
+        "actions": [
+        ],
+        "displayName": "host1.host.com",
+        "executors": [
+            {},
+            {}
+        ],
+        "icon": "computer.png",
+        "idle": False,
+        "jnlpAgent": True,
+        "launchSupported": False,
+        "loadStatistics": {
+        },
+        "manualLaunchAllowed": True,
+        "monitorData": {
+            "hudson.node_monitors.SwapSpaceMonitor": {
+                "availablePhysicalMemory": 8462417920,
+                "availableSwapSpace": 0,
+                "totalPhysicalMemory": 75858042880,
+                "totalSwapSpace": 0
             },
-            {
-              
+            "hudson.node_monitors.ArchitectureMonitor": "Linux (amd64)",
+            "hudson.node_monitors.ResponseTimeMonitor": {
+                "average": 2
+            },
+            "hudson.node_monitors.TemporarySpaceMonitor": {
+                "path": "/tmp",
+                "size": 430744551424
+            },
+            "hudson.node_monitors.DiskSpaceMonitor": {
+                "path": "/data/jenkins",
+                "size": 1214028627968
+            },
+            "hudson.node_monitors.ClockMonitor": {
+                "diff": 1
             }
-          ],
-          "icon" : "computer.png",
-          "idle" : False,
-          "jnlpAgent" : True,
-          "launchSupported" : False,
-          "loadStatistics" : {
-            
-          },
-          "manualLaunchAllowed" : True,
-          "monitorData" : {
-            "hudson.node_monitors.SwapSpaceMonitor" : {
-              "availablePhysicalMemory" : 8462417920,
-              "availableSwapSpace" : 0,
-              "totalPhysicalMemory" : 75858042880,
-              "totalSwapSpace" : 0
-            },
-            "hudson.node_monitors.ArchitectureMonitor" : "Linux (amd64)",
-            "hudson.node_monitors.ResponseTimeMonitor" : {
-              "average" : 2
-            },
-            "hudson.node_monitors.TemporarySpaceMonitor" : {
-              "path" : "/tmp",
-              "size" : 430744551424
-            },
-            "hudson.node_monitors.DiskSpaceMonitor" : {
-              "path" : "/data/jenkins",
-              "size" : 1214028627968
-            },
-            "hudson.node_monitors.ClockMonitor" : {
-              "diff" : 1
-            }
-          },
-          "numExecutors" : 2,
-          "offline" : False,
-          "offlineCause" : None,
-          "offlineCauseReason" : "",
-          "oneOffExecutors" : [
-            {
-              
-            },
-            {
-              
-            }
-          ],
-          "temporarilyOffline" : False
-        }
+        },
+        "numExecutors": 2,
+        "offline": False,
+        "offlineCause": None,
+        "offlineCauseReason": "",
+        "oneOffExecutors": [
+            {},
+            {}
+        ],
+        "temporarilyOffline": False
+    }
 
     DATA2 = {
-          "actions" : [
-            
-          ],
-          "displayName" : "host2.host.com",
-          "executors" : [
-            {
-              
+        "actions": [
+        ],
+        "displayName": "host2.host.com",
+        "executors": [
+            {},
+            {},
+            {},
+            {}
+        ],
+        "icon": "computer.png",
+        "idle": False,
+        "jnlpAgent": True,
+        "launchSupported": False,
+        "loadStatistics": {
+        },
+        "manualLaunchAllowed": True,
+        "monitorData": {
+            "hudson.node_monitors.SwapSpaceMonitor": {
+                "availablePhysicalMemory": 8462417920,
+                "availableSwapSpace": 0,
+                "totalPhysicalMemory": 75858042880,
+                "totalSwapSpace": 0
             },
-            {
-              
+            "hudson.node_monitors.ArchitectureMonitor": "Linux (amd64)",
+            "hudson.node_monitors.ResponseTimeMonitor": {
+                "average": 2
             },
-            {
-              
+            "hudson.node_monitors.TemporarySpaceMonitor": {
+                "path": "/tmp",
+                "size": 430744551424
             },
-            {
-              
+            "hudson.node_monitors.DiskSpaceMonitor": {
+                "path": "/data/jenkins",
+                "size": 1214028627968
+            },
+            "hudson.node_monitors.ClockMonitor": {
+                "diff": 1
             }
-          ],
-          "icon" : "computer.png",
-          "idle" : False,
-          "jnlpAgent" : True,
-          "launchSupported" : False,
-          "loadStatistics" : {
-            
-          },
-          "manualLaunchAllowed" : True,
-          "monitorData" : {
-            "hudson.node_monitors.SwapSpaceMonitor" : {
-              "availablePhysicalMemory" : 8462417920,
-              "availableSwapSpace" : 0,
-              "totalPhysicalMemory" : 75858042880,
-              "totalSwapSpace" : 0
-            },
-            "hudson.node_monitors.ArchitectureMonitor" : "Linux (amd64)",
-            "hudson.node_monitors.ResponseTimeMonitor" : {
-              "average" : 2
-            },
-            "hudson.node_monitors.TemporarySpaceMonitor" : {
-              "path" : "/tmp",
-              "size" : 430744551424
-            },
-            "hudson.node_monitors.DiskSpaceMonitor" : {
-              "path" : "/data/jenkins",
-              "size" : 1214028627968
-            },
-            "hudson.node_monitors.ClockMonitor" : {
-              "diff" : 1
-            }
-          },
-          "numExecutors" : 4,
-          "offline" : False,
-          "offlineCause" : None,
-          "offlineCauseReason" : "",
-          "oneOffExecutors" : [
-            {
-              
-            },
-            {
-              
-            }
-          ],
-          "temporarilyOffline" : False
-        }
+        },
+        "numExecutors": 4,
+        "offline": False,
+        "offlineCause": None,
+        "offlineCauseReason": "",
+        "oneOffExecutors": [
+            {},
+            {}
+        ],
+        "temporarilyOffline": False
+    }
 
     DATA3 = {
-          "actions" : [
-            
-          ],
-          "displayName" : "host3.host.com",
-          "executors" : [
-            {
-              
+        "actions": [
+        ],
+        "displayName": "host3.host.com",
+        "executors": [
+            {}
+        ],
+        "icon": "computer.png",
+        "idle": False,
+        "jnlpAgent": True,
+        "launchSupported": False,
+        "loadStatistics": {},
+        "manualLaunchAllowed": True,
+        "monitorData": {
+            "hudson.node_monitors.SwapSpaceMonitor": {
+                "availablePhysicalMemory": 8462417920,
+                "availableSwapSpace": 0,
+                "totalPhysicalMemory": 75858042880,
+                "totalSwapSpace": 0
+            },
+            "hudson.node_monitors.ArchitectureMonitor": "Linux (amd64)",
+            "hudson.node_monitors.ResponseTimeMonitor": {
+                "average": 2
+            },
+            "hudson.node_monitors.TemporarySpaceMonitor": {
+                "path": "/tmp",
+                "size": 430744551424
+            },
+            "hudson.node_monitors.DiskSpaceMonitor": {
+                "path": "/data/jenkins",
+                "size": 1214028627968
+            },
+            "hudson.node_monitors.ClockMonitor": {
+                "diff": 1
             }
-          ],
-          "icon" : "computer.png",
-          "idle" : False,
-          "jnlpAgent" : True,
-          "launchSupported" : False,
-          "loadStatistics" : {
-            
-          },
-          "manualLaunchAllowed" : True,
-          "monitorData" : {
-            "hudson.node_monitors.SwapSpaceMonitor" : {
-              "availablePhysicalMemory" : 8462417920,
-              "availableSwapSpace" : 0,
-              "totalPhysicalMemory" : 75858042880,
-              "totalSwapSpace" : 0
-            },
-            "hudson.node_monitors.ArchitectureMonitor" : "Linux (amd64)",
-            "hudson.node_monitors.ResponseTimeMonitor" : {
-              "average" : 2
-            },
-            "hudson.node_monitors.TemporarySpaceMonitor" : {
-              "path" : "/tmp",
-              "size" : 430744551424
-            },
-            "hudson.node_monitors.DiskSpaceMonitor" : {
-              "path" : "/data/jenkins",
-              "size" : 1214028627968
-            },
-            "hudson.node_monitors.ClockMonitor" : {
-              "diff" : 1
-            }
-          },
-          "numExecutors" : 1,
-          "offline" : False,
-          "offlineCause" : None,
-          "offlineCauseReason" : "",
-          "oneOffExecutors" : [
-            {
-              
-            },
-            {
-              
-            }
-          ],
-          "temporarilyOffline" : False
-        }
-
+        },
+        "numExecutors": 1,
+        "offline": False,
+        "offlineCause": None,
+        "offlineCauseReason": "",
+        "oneOffExecutors": [
+            {},
+            {}
+        ],
+        "temporarilyOffline": False
+    }
 
     EXEC0 = {
-      "currentExecutable" : {
-        "number" : 4168,
-        "url" : "http://localhost:8080/job/testjob/4168/"
-      },
-      "currentWorkUnit" : {
-        
-      },
-      "idle" : False,
-      "likelyStuck" : False,
-      "number" : 0,
-      "progress" : 48
+        "currentExecutable": {
+            "number": 4168,
+            "url": "http://localhost:8080/job/testjob/4168/"
+        },
+        "currentWorkUnit": {},
+        "idle": False,
+        "likelyStuck": False,
+        "number": 0,
+        "progress": 48
     }
 
     EXEC1 = {
-      "currentExecutable" : None,
-      "currentWorkUnit" : None,
-      "idle" : True,
-      "likelyStuck" : False,
-      "number" : 0,
-      "progress" : -1
+        "currentExecutable": None,
+        "currentWorkUnit": None,
+        "idle": True,
+        "likelyStuck": False,
+        "number": 0,
+        "progress": -1
     }
 
     @mock.patch.object(Jenkins, '_poll')
@@ -347,13 +290,16 @@ class TestExecutors(unittest.TestCase):
         for e in exec_info:
             self.assertEquals(e.get_progress(), -1, 'Should return 48 %')
             self.assertEquals(e.is_idle(), True, 'Should return True')
-            self.assertEquals(repr(e), '<jenkinsapi.executor.Executor host3.host.com 0>')
+            self.assertEquals(
+                repr(e),
+                '<jenkinsapi.executor.Executor host3.host.com 0>'
+            )
 
     @mock.patch.object(Executor, '_poll')
     def test_likely_stuck(self, _poll_executor):
         _poll_executor.return_value = self.EXEC0
         baseurl = 'http://localhost:8080/computer/host0.host.com/executors/0'
-        nodename = 'host0.host.com'    
+        nodename = 'host0.host.com'
         single_executer = Executor(baseurl, nodename, self.J, '0')
         self.assertEquals(single_executer.likely_stuck(), False)
 
@@ -361,10 +307,16 @@ class TestExecutors(unittest.TestCase):
     def test_get_current_executable(self, _poll_executor):
         _poll_executor.return_value = self.EXEC0
         baseurl = 'http://localhost:8080/computer/host0.host.com/executors/0'
-        nodename = 'host0.host.com'    
+        nodename = 'host0.host.com'
         single_executer = Executor(baseurl, nodename, self.J, '0')
-        self.assertEquals(single_executer.get_current_executable()['number'], 4168)
-        self.assertEquals(single_executer.get_current_executable()['url'], 'http://localhost:8080/job/testjob/4168/')
+        self.assertEquals(
+            single_executer.get_current_executable()['number'],
+            4168
+        )
+        self.assertEquals(
+            single_executer.get_current_executable()['url'],
+            'http://localhost:8080/job/testjob/4168/'
+        )
 
 
 if __name__ == '__main__':
