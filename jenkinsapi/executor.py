@@ -25,10 +25,23 @@ class Executor(JenkinsBase):
         self.nodename = nodename
         self.number = number
         self.jenkins = jenkins_obj
+        self.baseurl = baseurl
         JenkinsBase.__init__(self, baseurl)
 
     def get_jenkins_obj(self):
         return self.jenkins
 
     def __str__(self):
-        return self.number
+        return '%s' % self.number
+
+    def get_progress(self):
+        """Returns percentage"""
+        self.poll()
+        return self._data['progress']
+
+    def is_idle(self):
+        """
+        Returns Boolean
+        """
+        self.poll()
+        return self._data['is_idle']

@@ -9,7 +9,7 @@ import logging
 import urlparse
 
 from jenkinsapi import config
-from jenkinsapi.executor import Executors
+from jenkinsapi.executors import Executors
 from jenkinsapi.job import Job
 from jenkinsapi.jobs import Jobs
 from jenkinsapi.node import Node

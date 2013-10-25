@@ -1,4 +1,5 @@
 import mock
+import types
 import unittest
 
 from jenkinsapi.jenkins import Jenkins
@@ -6,7 +7,28 @@ from jenkinsapi.executors import Executors
 from jenkinsapi.executor import Executor
 
 
-class TestExecutor(unittest.TestCase):
+class TestExecutors(unittest.TestCase):
+
+    DATAM = {
+        'assignedLabels': [{}],
+        'description': None,
+        'jobs': [],
+        'mode': 'NORMAL',
+        'nodeDescription': 'the master Jenkins node',
+        'nodeName': '',
+        'numExecutors': 2,
+        'overallLoad': {},
+        'primaryView': {'name': 'All', 'url': 'http://localhost:8080/'},
+        'quietingDown': False,
+        'slaveAgentPort': 0,
+        'unlabeledLoad': {},
+        'useCrumbs': False,
+        'useSecurity': False,
+        'views': [
+            {'name': 'All', 'url': 'http://localhost:8080/'},
+            {'name': 'BigMoney', 'url': 'http://localhost:8080/view/BigMoney/'}
+        ]
+    }
 
     DATA0 = {
           "actions" : [
@@ -217,21 +239,6 @@ class TestExecutor(unittest.TestCase):
           "executors" : [
             {
               
-            },
-            {
-              
-            },
-            {
-              
-            },
-            {
-              
-            },
-            {
-              
-            },
-            {
-              
             }
           ],
           "icon" : "computer.png",
@@ -265,7 +272,7 @@ class TestExecutor(unittest.TestCase):
               "diff" : 1
             }
           },
-          "numExecutors" : 6,
+          "numExecutors" : 1,
           "offline" : False,
           "offlineCause" : None,
           "offlineCauseReason" : "",
@@ -280,36 +287,50 @@ class TestExecutor(unittest.TestCase):
           "temporarilyOffline" : False
         }
 
+
+    EXEC0 = {
+      "currentExecutable" : {
+        "number" : 4168,
+        "url" : "http://localhost:8080/job/testjob/4168/"
+      },
+      "currentWorkUnit" : {
+        
+      },
+      "idle" : False,
+      "likelyStuck" : False,
+      "number" : 0,
+      "progress" : 48
+    }
+
     @mock.patch.object(Jenkins, '_poll')
     @mock.patch.object(Executors, '_poll')
-    def setUp(self, _poll_executors, _poll_jenkins):
-        _poll_jenkins.return_value = self.DATA0
-        _poll_executors.return_value = self.DATA1
-
-        # def __init__(self, baseurl, nodename, jenkins_obj):
-
+    def setUp(self, _poll_executor, _poll_jenkins):
+        _poll_jenkins.return_value = self.DATAM
+        _poll_executor.return_value = self.DATA0
         self.J = Jenkins('http://localhost:8080')
-        self.ns = self.J.get_executors(self.DATA0['displayName'])
+        self.executors = self.J.get_executors(self.DATA0['displayName'])
         # self.ns = Nodes('http://localhost:8080/computer', 'bobnit', self.J)
 
     def testRepr(self):
         # Can we produce a repr string for this object
-        repr(self.ns)
+        repr(self.J)
 
     def testCheckURL(self):
-        self.assertEquals(self.ns.baseurl, 'http://localhost:8080/computer')
+        self.assertEquals(self.J.baseurl, 'http://localhost:8080')
 
+    @mock.patch.object(Jenkins, '_poll')
+    @mock.patch.object(Executors, '_poll')
     @mock.patch.object(Executor, '_poll')
-    def testGetMasterNode(self, _poll_executor):
-        _poll_executor.return_value = self.DATA2
-        mn = self.ns['master']
-        self.assertIsInstance(mn, Executor)
+    def testGetExecutors(self, _poll_executor, _poll_executors, _poll_jenkins):
+        _poll_jenkins.return_value = self.DATAM
+        _poll_executor.return_value = self.EXEC0
+        _poll_executors.return_value = self.DATA3
+        exec_info = self.J.get_executors(self.DATA3['displayName'])
 
-    @mock.patch.object(Executor, '_poll')
-    def testGetNonMasterNode(self, _poll_executor):
-        _poll_executor.return_value = self.DATA3
-        mn = self.ns['halob']
-        self.assertIsInstance(mn, Executor)
+        self.assertIsInstance(exec_info, object)
+        for e in exec_info:
+            self.assertEquals(e.get_progress(), 48, 'Should return 48 %')
+
 
 if __name__ == '__main__':
     unittest.main()

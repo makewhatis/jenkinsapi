@@ -3,7 +3,7 @@ This module implements the Executors class, which is intended to be a container-
 interface for all of the executors defined on a single Jenkins node.
 """
 import logging
-from jenkinsapi.executor import Executors
+from jenkinsapi.executor import Executor
 from jenkinsapi.custom_exceptions import JenkinsAPIException, UnknownExecutor
 from jenkinsapi.jenkinsbase import JenkinsBase
 
@@ -20,41 +20,30 @@ class Executors(JenkinsBase):
         self.nodename = nodename
         self.jenkins = jenkins
         JenkinsBase.__init__(self, baseurl)
+        self.count = len(self._data['executors'])
 
-
+    def get_jenkins_obj(self):
+        return self.jenkins
 
     def __str__(self):
-        return 'Nodes @ %s' % self.baseurl
+        return 'Executors @ %s' % self.baseurl
 
     def __contains__(self, nodename):
         return nodename in self.keys()
 
-    def iterkeys(self):
-        for item in self._data['computer']:
-            yield item['displayName']
-
     def keys(self):
         return list(self.iterkeys())
 
-    def iteritems(self):
-        for item in self._data['computer']:
-            nodename = item['displayName']
-            if nodename.lower() == 'master':
-                nodeurl = '%s/(%s)' % (self.baseurl, nodename)
-            else:
-                nodeurl = '%s/%s' % (self.baseurl, nodename)
+    def __iter__(self):
+        for index in range(self.count):
+            str(index)
+            executor_url = '%s/executors/%s' % (self.baseurl, index)
             try:
-                yield item['displayName'], Node(nodeurl, nodename, self.jenkins)
+                yield Executor(executor_url, self.nodename, self.jenkins, index)
             except Exception:
                 import ipdb
                 ipdb.set_trace()
 
-    def __getitem__(self, nodename):
-        self_as_dict = dict(self.iteritems())
-        if nodename in self_as_dict:
-            return self_as_dict[nodename]
-        else:
-            raise UnknownNode(nodename)
 
     def __len__(self):
         return len(self.iteritems())
