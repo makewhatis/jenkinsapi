@@ -28,11 +28,8 @@ class Executor(JenkinsBase):
         self.baseurl = baseurl
         JenkinsBase.__init__(self, baseurl)
 
-    def get_jenkins_obj(self):
-        return self.jenkins
-
     def __str__(self):
-        return '%s' % self.number
+        return '%s %s' % (self.nodename, self.number)
 
     def get_progress(self):
         """Returns percentage"""
@@ -44,4 +41,4 @@ class Executor(JenkinsBase):
         Returns Boolean
         """
         self.poll()
-        return self._data['is_idle']
+        return self._data['idle']

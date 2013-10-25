@@ -302,6 +302,15 @@ class TestExecutors(unittest.TestCase):
       "progress" : 48
     }
 
+    EXEC1 = {
+      "currentExecutable" : None,
+      "currentWorkUnit" : None,
+      "idle" : True,
+      "likelyStuck" : False,
+      "number" : 0,
+      "progress" : -1
+    }
+
     @mock.patch.object(Jenkins, '_poll')
     @mock.patch.object(Executors, '_poll')
     def setUp(self, _poll_executor, _poll_jenkins):
@@ -313,7 +322,7 @@ class TestExecutors(unittest.TestCase):
 
     def testRepr(self):
         # Can we produce a repr string for this object
-        repr(self.J)
+        assert repr(self.J)
 
     def testCheckURL(self):
         self.assertEquals(self.J.baseurl, 'http://localhost:8080')
@@ -328,9 +337,28 @@ class TestExecutors(unittest.TestCase):
         exec_info = self.J.get_executors(self.DATA3['displayName'])
 
         self.assertIsInstance(exec_info, object)
+        self.assertIsInstance(repr(exec_info), str)
+
         for e in exec_info:
             self.assertEquals(e.get_progress(), 48, 'Should return 48 %')
+            
 
+    @mock.patch.object(Jenkins, '_poll')
+    @mock.patch.object(Executors, '_poll')
+    @mock.patch.object(Executor, '_poll')
+    def testis_idle(self, _poll_executor, _poll_executors, _poll_jenkins):
+        _poll_jenkins.return_value = self.DATAM
+        _poll_executor.return_value = self.EXEC1
+        _poll_executors.return_value = self.DATA3
+        exec_info = self.J.get_executors('host3.host.com')
+
+        self.assertIsInstance(exec_info, object)
+        for e in exec_info:
+            self.assertEquals(e.get_progress(), -1, 'Should return 48 %')
+            self.assertEquals(e.is_idle(), True, 'Should return True')
+            self.assertEquals(repr(e), '<jenkinsapi.executor.Executor host3.host.com 0>')
+
+    
 
 if __name__ == '__main__':
     unittest.main()

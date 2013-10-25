@@ -22,17 +22,8 @@ class Executors(JenkinsBase):
         JenkinsBase.__init__(self, baseurl)
         self.count = len(self._data['executors'])
 
-    def get_jenkins_obj(self):
-        return self.jenkins
-
     def __str__(self):
         return 'Executors @ %s' % self.baseurl
-
-    def __contains__(self, nodename):
-        return nodename in self.keys()
-
-    def keys(self):
-        return list(self.iterkeys())
 
     def __iter__(self):
         for index in range(self.count):
@@ -40,10 +31,8 @@ class Executors(JenkinsBase):
             executor_url = '%s/executors/%s' % (self.baseurl, index)
             try:
                 yield Executor(executor_url, self.nodename, self.jenkins, index)
-            except Exception:
-                import ipdb
-                ipdb.set_trace()
+            except JenkinsAPIException as e:
+                log.error("Error querying Executors: %s" % e)
 
+                
 
-    def __len__(self):
-        return len(self.iteritems())
