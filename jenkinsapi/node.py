@@ -26,6 +26,9 @@ class Node(JenkinsBase):
         self.jenkins = jenkins_obj
         JenkinsBase.__init__(self, baseurl)
 
+    def get_executor_count(self):
+        return len(self._data['executors'])
+
     def get_jenkins_obj(self):
         return self.jenkins
 
