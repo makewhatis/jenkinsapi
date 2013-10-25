@@ -4,7 +4,7 @@ interface for all of the executors defined on a single Jenkins node.
 """
 import logging
 from jenkinsapi.executor import Executor
-from jenkinsapi.custom_exceptions import JenkinsAPIException, UnknownExecutor
+from jenkinsapi.custom_exceptions import JenkinsAPIException
 from jenkinsapi.jenkinsbase import JenkinsBase
 
 log = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ class Executors(JenkinsBase):
         self.nodename = nodename
         self.jenkins = jenkins
         JenkinsBase.__init__(self, baseurl)
-        self.count = len(self._data['executors'])
+        self.count = self._data['numExecutors']
 
     def __str__(self):
         return 'Executors @ %s' % self.baseurl
@@ -31,7 +31,6 @@ class Executors(JenkinsBase):
 
     def __iter__(self):
         for index in range(self.count):
-            str(index)
             executor_url = '%s/executors/%s' % (self.baseurl, index)
             try:
                 yield Executor(executor_url, self.nodename, self.jenkins, index)

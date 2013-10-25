@@ -23,11 +23,6 @@ class ArtifactsMissing(NotFound):
     """
     pass
 
-class UnknownExecutor(KeyError, NotFound):
-    """
-    Jenkins does not recognize the executor requested.
-    """
-    pass
 
 class UnknownJob(KeyError, NotFound):
     """
