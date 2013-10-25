@@ -310,5 +310,5 @@ class Jenkins(JenkinsBase):
         return plugin_name in self.get_plugins()
 
     def get_executors(self, nodename):
-        url = '%s/%s' % (self.baseurl, nodename)
+        url = '%s/computer/%s' % (self.baseurl, nodename)
         return Executors(url, nodename, self)

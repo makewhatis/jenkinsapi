@@ -312,13 +312,9 @@ class TestExecutors(unittest.TestCase):
     }
 
     @mock.patch.object(Jenkins, '_poll')
-    @mock.patch.object(Executors, '_poll')
-    def setUp(self, _poll_executor, _poll_jenkins):
+    def setUp(self, _poll_jenkins):
         _poll_jenkins.return_value = self.DATAM
-        _poll_executor.return_value = self.DATA0
         self.J = Jenkins('http://localhost:8080')
-        self.executors = self.J.get_executors(self.DATA0['displayName'])
-        # self.ns = Nodes('http://localhost:8080/computer', 'bobnit', self.J)
 
     def testRepr(self):
         # Can we produce a repr string for this object
@@ -327,11 +323,9 @@ class TestExecutors(unittest.TestCase):
     def testCheckURL(self):
         self.assertEquals(self.J.baseurl, 'http://localhost:8080')
 
-    @mock.patch.object(Jenkins, '_poll')
     @mock.patch.object(Executors, '_poll')
     @mock.patch.object(Executor, '_poll')
-    def testGetExecutors(self, _poll_executor, _poll_executors, _poll_jenkins):
-        _poll_jenkins.return_value = self.DATAM
+    def testGetExecutors(self, _poll_executor, _poll_executors):
         _poll_executor.return_value = self.EXEC0
         _poll_executors.return_value = self.DATA3
         exec_info = self.J.get_executors(self.DATA3['displayName'])
@@ -341,13 +335,10 @@ class TestExecutors(unittest.TestCase):
 
         for e in exec_info:
             self.assertEquals(e.get_progress(), 48, 'Should return 48 %')
-            
 
-    @mock.patch.object(Jenkins, '_poll')
     @mock.patch.object(Executors, '_poll')
     @mock.patch.object(Executor, '_poll')
-    def testis_idle(self, _poll_executor, _poll_executors, _poll_jenkins):
-        _poll_jenkins.return_value = self.DATAM
+    def testis_idle(self, _poll_executor, _poll_executors):
         _poll_executor.return_value = self.EXEC1
         _poll_executors.return_value = self.DATA3
         exec_info = self.J.get_executors('host3.host.com')
@@ -358,7 +349,23 @@ class TestExecutors(unittest.TestCase):
             self.assertEquals(e.is_idle(), True, 'Should return True')
             self.assertEquals(repr(e), '<jenkinsapi.executor.Executor host3.host.com 0>')
 
-    
+    @mock.patch.object(Executor, '_poll')
+    def test_likely_stuck(self, _poll_executor):
+        _poll_executor.return_value = self.EXEC0
+        baseurl = 'http://localhost:8080/computer/host0.host.com/executors/0'
+        nodename = 'host0.host.com'    
+        single_executer = Executor(baseurl, nodename, self.J, '0')
+        self.assertEquals(single_executer.likely_stuck(), False)
+
+    @mock.patch.object(Executor, '_poll')
+    def test_get_current_executable(self, _poll_executor):
+        _poll_executor.return_value = self.EXEC0
+        baseurl = 'http://localhost:8080/computer/host0.host.com/executors/0'
+        nodename = 'host0.host.com'    
+        single_executer = Executor(baseurl, nodename, self.J, '0')
+        self.assertEquals(single_executer.get_current_executable()['number'], 4168)
+        self.assertEquals(single_executer.get_current_executable()['url'], 'http://localhost:8080/job/testjob/4168/')
+
 
 if __name__ == '__main__':
     unittest.main()

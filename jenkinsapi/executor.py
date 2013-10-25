@@ -31,14 +31,39 @@ class Executor(JenkinsBase):
     def __str__(self):
         return '%s %s' % (self.nodename, self.number)
 
+    def get_jenkins_obj(self):
+        return self.jenkins
+
     def get_progress(self):
         """Returns percentage"""
         self.poll()
         return self._data['progress']
 
+    def get_number(self):
+        """
+        Get Executor number. 
+        """
+        self.poll()
+        return self._data['']
+
     def is_idle(self):
         """
-        Returns Boolean
+        Returns Boolean: whether Executor is idle or not.
         """
         self.poll()
         return self._data['idle']
+
+    def likely_stuck(self):
+        """
+        Returns Boolean: whether Executor is likely stuck or not.
+        """
+        self.poll()
+        return self._data['likelyStuck']
+
+    def get_current_executable(self):
+        """
+        Returns the current Queue.Task this executor is running.
+        """
+        self.poll()
+        return self._data['currentExecutable']
+
