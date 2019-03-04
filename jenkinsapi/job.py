@@ -214,6 +214,12 @@ class Job(JenkinsBase, MutableJenkinsThing):
         if not redirect_url.startswith("%s/queue/item" % self.jenkins.baseurl):
             raise ValueError("Not a Queue URL: %s" % redirect_url)
 
+        redirect_url_split = redirect_url.split('/queue/')
+        if len(redirect_url_split) < 2:
+            raise ValueError("Could not split into a valid Queue item: {}".format(
+              redirect_url_split))
+
+        redirect_url = "{}queue/{}".format(self.url, redirect_url_split[1])
         qi = QueueItem(redirect_url, self.jenkins)
         if block:
             qi.block_until_complete(delay=delay)

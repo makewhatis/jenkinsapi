@@ -1,0 +1,29 @@
+From 9878599221914e4799b3a172109a4781013ac955 Mon Sep 17 00:00:00 2001
+From: David Johansen <djohansen@twitter.com>
+Date: Mon, 4 Mar 2019 14:13:01 -0800
+Subject: [PATCH] Modifying to use our custom queue endpoint
+
+---
+ jenkinsapi/job.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/jenkinsapi/job.py b/jenkinsapi/job.py
+index 0cd2def..049d2bf 100644
+--- a/jenkinsapi/job.py
++++ b/jenkinsapi/job.py
+@@ -214,6 +214,12 @@ class Job(JenkinsBase, MutableJenkinsThing):
+         if not redirect_url.startswith("%s/queue/item" % self.jenkins.baseurl):
+             raise ValueError("Not a Queue URL: %s" % redirect_url)
+ 
++        redirect_url_split = redirect_url.split('/queue/')
++        if len(redirect_url_split) < 2:
++            raise ValueError("Could not split into a valid Queue item: {}".format(
++              redirect_url_split))
++
++        redirect_url = "{}queue/{}".format(self.url, redirect_url_split[1])
+         qi = QueueItem(redirect_url, self.jenkins)
+         if block:
+             qi.block_until_complete(delay=delay)
+-- 
+2.4.11.818.g418bc64-twtrsrc
+
